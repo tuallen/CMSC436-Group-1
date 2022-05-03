@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">BlockAssessment</string>
     <string name="title_activity_maps">MapsActivity</string>
-    <string name="survey_title">Neighborhood Assessment</string>
+    <string name="default_survey_title">Neighborhood Assessment</string>
 </resources>
