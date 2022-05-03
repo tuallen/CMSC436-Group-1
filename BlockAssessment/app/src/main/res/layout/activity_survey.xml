@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SurveyActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/survey_title"
+        android:textColor="#000000"
+        android:textSize="28sp"
+        tools:layout_editor_absoluteX="27dp" />
+
+    <TextView
+        android:id="@+id/textViewHousing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Housing"
+        app:layout_constraintBottom_toTopOf="@+id/textViewNeighborhood"
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/textViewNeighborhood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Neighborhood"
+        app:layout_constraintBottom_toTopOf="@+id/textViewTransportation"
+        app:layout_constraintStart_toStartOf="@+id/textViewHousing"
+        app:layout_constraintTop_toBottomOf="@+id/textViewHousing" />
+
+    <TextView
+        android:id="@+id/textViewTransportation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Transportation"
+        app:layout_constraintStart_toStartOf="@+id/textViewNeighborhood"
+        tools:layout_editor_absoluteY="157dp" />
+
+    <TextView
+        android:id="@+id/textViewEnvironment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Environment"
+        app:layout_constraintStart_toStartOf="@+id/textViewTransportation"
+        tools:layout_editor_absoluteY="203dp" />
+
+    <TextView
+        android:id="@+id/textViewHealth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Health"
+        app:layout_constraintStart_toStartOf="@+id/textViewEnvironment"
+        tools:layout_editor_absoluteY="250dp" />
+
+    <TextView
+        android:id="@+id/textViewEngagement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Engagement"
+        app:layout_constraintStart_toStartOf="@+id/textViewHealth"
+        tools:layout_editor_absoluteY="297dp" />
+
+    <TextView
+        android:id="@+id/textViewOpportunity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Opportunity"
+        app:layout_constraintStart_toStartOf="@+id/textViewEngagement"
+        tools:layout_editor_absoluteY="345dp" />
+
+    <TextView
+        android:id="@+id/textViewPersonalReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Personal Review"
+        app:layout_constraintBottom_toTopOf="@+id/editTextPersonalReview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextHousing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewHousing"
+        app:layout_constraintEnd_toEndOf="@+id/title"
+        app:layout_constraintTop_toTopOf="@+id/textViewHousing" />
+
+    <EditText
+        android:id="@+id/editTextNeighborhood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewNeighborhood"
+        app:layout_constraintEnd_toEndOf="@+id/editTextHousing"
+        app:layout_constraintTop_toTopOf="@+id/textViewNeighborhood" />
+
+    <EditText
+        android:id="@+id/editTextTransportation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTransportation"
+        app:layout_constraintEnd_toEndOf="@+id/editTextNeighborhood"
+        app:layout_constraintTop_toTopOf="@+id/textViewTransportation" />
+
+    <EditText
+        android:id="@+id/editTextEnvironment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewEnvironment"
+        app:layout_constraintEnd_toEndOf="@+id/editTextTransportation"
+        app:layout_constraintTop_toTopOf="@+id/textViewEnvironment" />
+
+    <EditText
+        android:id="@+id/editTextHealth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewHealth"
+        app:layout_constraintEnd_toEndOf="@+id/editTextEnvironment"
+        app:layout_constraintTop_toTopOf="@+id/textViewHealth" />
+
+    <EditText
+        android:id="@+id/editTextEngagement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewEngagement"
+        app:layout_constraintEnd_toEndOf="@+id/editTextHealth"
+        app:layout_constraintTop_toTopOf="@+id/textViewEngagement" />
+
+    <EditText
+        android:id="@+id/editTextOpportunity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewOpportunity"
+        app:layout_constraintEnd_toEndOf="@+id/editTextEngagement"
+        app:layout_constraintTop_toTopOf="@+id/textViewOpportunity" />
+
+    <EditText
+        android:id="@+id/editTextPersonalReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="509dp" />
+
+    <Button
+        android:id="@+id/buttonSubmitAssessment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPersonalReview"
+        tools:layout_editor_absoluteX="151dp" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="editTextOpportunity,textViewHousing,textViewTransportation,editTextNeighborhood,textViewOpportunity,textViewEnvironment,textViewNeighborhood,editTextHousing,editTextEnvironment,textViewHealth,textViewEngagement,editTextHealth,editTextTransportation,editTextEngagement" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
