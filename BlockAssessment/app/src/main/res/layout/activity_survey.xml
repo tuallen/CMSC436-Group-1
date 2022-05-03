@@ -171,16 +171,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPersonalReview"
         tools:layout_editor_absoluteX="151dp" />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:constraint_referenced_ids="editTextOpportunity,textViewHousing,textViewTransportation,editTextNeighborhood,textViewOpportunity,textViewEnvironment,textViewNeighborhood,editTextHousing,editTextEnvironment,textViewHealth,textViewEngagement,editTextHealth,editTextTransportation,editTextEngagement" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
