@@ -7,23 +7,22 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class SurveyActivity : AppCompatActivity() {
-    lateinit var db : FirebaseFirestore
-    private lateinit var mTitle: TextView
-    lateinit var mHousing: EditText
-    lateinit var mNeighborhood: EditText
-    lateinit var mTransportation: EditText
-    lateinit var mEnvironment: EditText
-    lateinit var mHealth: EditText
-    lateinit var mEngagement: EditText
-    lateinit var mOpportunity: EditText
-    lateinit var mReview: EditText
+    private lateinit var db : FirebaseFirestore
+    private lateinit var mHousing: EditText
+    private lateinit var mNeighborhood: EditText
+    private lateinit var mTransportation: EditText
+    private lateinit var mEnvironment: EditText
+    private lateinit var mHealth: EditText
+    private lateinit var mEngagement: EditText
+    private lateinit var mOpportunity: EditText
+    private lateinit var mReview: EditText
     private lateinit var mSubmitButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,13 +32,12 @@ class SurveyActivity : AppCompatActivity() {
 
         db = Firebase.firestore // Reference to database
 
-        // Initialize title
-        mTitle = findViewById<View>(R.id.textViewTitle) as TextView
-        if (intent.hasExtra("blockName")) { // TODO: blockName
-            mTitle.text = intent.getStringExtra("blockName")
-        } else {
-            mTitle.text = resources.getString(R.string.default_survey_title)
-        }
+        // Set title
+        title = if (intent.hasExtra("blockName")) { // TODO: blockName
+                    intent.getStringExtra("blockName").toString()
+                } else {
+                    resources.getString(R.string.default_survey_title)
+                }
 
         // Initialize EditText fields
         mHousing = findViewById<View>(R.id.editTextHousing) as EditText
@@ -49,7 +47,7 @@ class SurveyActivity : AppCompatActivity() {
         mHealth = findViewById<View>(R.id.editTextHealth) as EditText
         mEngagement = findViewById<View>(R.id.editTextEngagement) as EditText
         mOpportunity = findViewById<View>(R.id.editTextOpportunity) as EditText
-        mReview = findViewById<View>(R.id.editTextPersonalReview) as EditText
+        mReview = findViewById<View>(R.id.editTextReview) as EditText
         // Limit score EditText fields to integers from 1 to 100
         mHousing.filters = arrayOf<InputFilter>(MinMaxFilter(1, 100))
         mNeighborhood.filters = arrayOf<InputFilter>(MinMaxFilter(1, 100))
@@ -94,9 +92,11 @@ class SurveyActivity : AppCompatActivity() {
             .add(assessment)
             .addOnSuccessListener { documentReference ->
                 Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                Toast.makeText(applicationContext, SUBMIT_SUCCESS, Toast.LENGTH_LONG).show()
             }
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error adding document", e)
+                Toast.makeText(applicationContext, SUBMIT_FAILED, Toast.LENGTH_LONG).show()
             }
 
         // Close activity // TODO: Intent, if necessary
@@ -143,6 +143,8 @@ class SurveyActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "Survey-Activity"
+        private const val SUBMIT_SUCCESS = "Assessment Submitted!"
+        private const val SUBMIT_FAILED = "Failed to submit assessment!"
     }
 
 }

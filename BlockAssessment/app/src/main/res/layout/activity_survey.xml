@@ -7,31 +7,21 @@
     tools:context=".SurveyActivity">
 
     <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:text="@string/default_survey_title"
-        android:textColor="#000000"
-        android:textSize="28sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/textViewHousing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="25dp"
         android:text="Housing"
-        app:layout_constraintBottom_toTopOf="@+id/textViewNeighborhood"
-        app:layout_constraintStart_toStartOf="@+id/textViewTitle"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewNeighborhood"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:text="Neighborhood"
-        app:layout_constraintBottom_toTopOf="@+id/textViewTransportation"
         app:layout_constraintStart_toStartOf="@+id/textViewHousing"
         app:layout_constraintTop_toBottomOf="@+id/textViewHousing" />
 
@@ -39,16 +29,16 @@
         android:id="@+id/textViewTransportation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="157dp"
+        android:layout_marginTop="40dp"
         android:text="Transportation"
         app:layout_constraintStart_toStartOf="@+id/textViewNeighborhood"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewNeighborhood" />
 
     <TextView
         android:id="@+id/textViewEnvironment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="40dp"
         android:text="Environment"
         app:layout_constraintStart_toStartOf="@+id/textViewTransportation"
         app:layout_constraintTop_toBottomOf="@+id/textViewTransportation" />
@@ -57,7 +47,7 @@
         android:id="@+id/textViewHealth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="40dp"
         android:text="Health"
         app:layout_constraintStart_toStartOf="@+id/textViewEnvironment"
         app:layout_constraintTop_toBottomOf="@+id/textViewEnvironment" />
@@ -66,7 +56,7 @@
         android:id="@+id/textViewEngagement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="40dp"
         android:text="Engagement"
         app:layout_constraintStart_toStartOf="@+id/textViewHealth"
         app:layout_constraintTop_toBottomOf="@+id/textViewHealth" />
@@ -75,29 +65,21 @@
         android:id="@+id/textViewOpportunity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
+        android:layout_marginTop="40dp"
         android:text="Opportunity"
         app:layout_constraintStart_toStartOf="@+id/textViewEngagement"
         app:layout_constraintTop_toBottomOf="@+id/textViewEngagement" />
-
-    <TextView
-        android:id="@+id/textViewPersonalReview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Personal Review"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPersonalReview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editTextHousing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="25dp"
         android:ems="10"
         android:hint="Rate 1-100"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@+id/textViewHousing"
-        app:layout_constraintEnd_toEndOf="@+id/textViewTitle"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textViewHousing" />
 
     <EditText
@@ -105,6 +87,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Rate 1-100"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@+id/textViewNeighborhood"
         app:layout_constraintEnd_toEndOf="@+id/editTextHousing"
@@ -115,6 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Rate 1-100"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@+id/textViewTransportation"
         app:layout_constraintEnd_toEndOf="@+id/editTextNeighborhood"
@@ -125,6 +109,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Rate 1-100"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@+id/textViewEnvironment"
         app:layout_constraintEnd_toEndOf="@+id/editTextTransportation"
@@ -135,6 +120,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Rate 1-100"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@+id/textViewHealth"
         app:layout_constraintEnd_toEndOf="@+id/editTextEnvironment"
@@ -145,6 +131,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Rate 1-100"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@+id/textViewEngagement"
         app:layout_constraintEnd_toEndOf="@+id/editTextHealth"
@@ -155,32 +142,46 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Rate 1-100"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@+id/textViewOpportunity"
         app:layout_constraintEnd_toEndOf="@+id/editTextEngagement"
         app:layout_constraintTop_toTopOf="@+id/textViewOpportunity" />
 
-    <EditText
-        android:id="@+id/editTextPersonalReview"
+    <TextView
+        android:id="@+id/textViewReview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="177dp"
-        android:layout_marginBottom="177dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="My Review"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextOpportunity" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextOpportunity" />
+
+    <EditText
+        android:id="@+id/editTextReview"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Tell us about your experience!"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewReview" />
 
     <Button
         android:id="@+id/buttonSubmitAssessment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPersonalReview" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
