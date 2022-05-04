@@ -10,14 +10,10 @@ import androidx.fragment.app.Fragment
 class Search() : Fragment() {
     //Whenever you need the context use mCallback (goes with fun onAttach)
     private lateinit var mCallback: Context
-
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
         return inflater.inflate(com.example.myapplication.R.layout.search_layout, container, false)
-
     }
 
     override fun onAttach(context: Context) {
