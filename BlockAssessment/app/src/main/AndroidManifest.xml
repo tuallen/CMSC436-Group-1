@@ -10,10 +10,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BlockAssessment">
         <activity
+<<<<<<< HEAD
             android:name=".MainActivity2"
             android:exported="false"
             android:label="@string/title_activity_main2"
             android:theme="@style/Theme.BlockAssessment.NoActionBar" />
+=======
+            android:name=".SurveyActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Hub"
+            android:exported="false" />
+>>>>>>> 340e6407d66bc065fe39bacd94e71a0d2e062140
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
