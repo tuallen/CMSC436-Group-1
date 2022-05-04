@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private var mDrawer: DrawerLayout? = null
     private var toolbar: Toolbar? = null
     private var nvDrawer: NavigationView? = null
+    private var fragment: Fragment? = null
 
     // Make sure to be using androidx.appcompat.app.ActionBarDrawerToggle version.
     private var drawerToggle: ActionBarDrawerToggle? = null
@@ -28,6 +29,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.example.myapplication.R.layout.activity_main)
+
+        val fragmentManager: FragmentManager = supportFragmentManager
+        fragmentManager.beginTransaction().replace(com.example.myapplication.R.id.flContent, NeighborhoodHub()).commit()
 
         // Set a Toolbar to replace the ActionBar.
         toolbar = findViewById<View>(com.example.myapplication.R.id.toolbar) as Toolbar
