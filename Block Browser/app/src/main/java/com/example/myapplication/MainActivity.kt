@@ -11,7 +11,9 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.example.myapplication.First.FirstFragment
+import com.example.myapplication.assessment.NeighborhoodAssessment
+import com.example.myapplication.neighborhood_hub.NeighborhoodHub
+import com.example.myapplication.search.Search
 import com.google.android.material.navigation.NavigationView
 
 
@@ -34,18 +36,14 @@ class MainActivity : AppCompatActivity() {
         // Find our drawer view
         mDrawer = findViewById<DrawerLayout>(com.example.myapplication.R.id.drawer_layout);
         drawerToggle = setupDrawerToggle();
-
         // Setup toggle to display hamburger icon with nice animation
         drawerToggle?.isDrawerIndicatorEnabled = true;
         drawerToggle?.syncState();
-
         // Tie DrawerLayout events to the ActionBarToggle
         mDrawer!!.addDrawerListener(drawerToggle!!);
-
         // Setup drawer view
-        nvDrawer?.let { setupDrawerContent(it) };
-
-
+        nvDrawer = findViewById(com.example.myapplication.R.id.nvView);
+        setupDrawerContent(nvDrawer!!)
 
     }
 
@@ -59,15 +57,14 @@ class MainActivity : AppCompatActivity() {
     private fun selectDrawerItem(menuItem: MenuItem) {
         // Create a new fragment and specify the fragment to show based on nav item clicked
         var fragment: Fragment? = null
-        val fragmentClass: Class<*>
-        fragmentClass = when (menuItem.itemId) {
-            com.example.myapplication.R.id.nav_first_fragment -> FirstFragment::class.java
-            com.example.myapplication.R.id.nav_second_fragment -> SecondFragment::class.java
-            com.example.myapplication.R.id.nav_third_fragment -> ThirdFragment::class.java
-            else -> FirstFragment::class.java
+        val fragmentClass: Fragment = when (menuItem.itemId) {
+            com.example.myapplication.R.id.hub -> NeighborhoodHub()
+            com.example.myapplication.R.id.search -> Search()
+            com.example.myapplication.R.id.assess -> NeighborhoodAssessment()
+            else -> NeighborhoodHub()
         }
         try {
-            fragment = fragmentClass.newInstance() as Fragment
+            fragment = fragmentClass
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -101,7 +98,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // The action bar home/up action should open or close the drawer.
-        when (item.getItemId()) {
+        when (item.itemId) {
             R.id.home -> {
                 mDrawer!!.openDrawer(GravityCompat.START)
                 return true

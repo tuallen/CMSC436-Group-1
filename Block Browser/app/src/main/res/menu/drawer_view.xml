@@ -2,27 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_first_fragment"
+            android:id="@+id/hub"
             android:icon="@drawable/ic_one"
-            android:title="First" />
+            android:title="Neighborhood Hub" />
         <item
-            android:id="@+id/nav_second_fragment"
+            android:id="@+id/search"
             android:icon="@drawable/ic_two"
-            android:title="Second" />
+            android:title="Search Neighborhoods" />
         <item
-            android:id="@+id/nav_third_fragment"
+            android:id="@+id/assess"
             android:icon="@drawable/ic_three"
-            android:title="Third" />
+            android:title="Neighborhood Assessments" />
     </group>
 
-
-            <group android:checkableBehavior="single">
-                <item
-                    android:icon="@drawable/ic_one"
-                    android:title="Sub item 1" />
-                <item
-                    android:icon="@drawable/ic_two"
-                    android:title="Sub item 2" />
-            </group>
+<!--    <group android:checkableBehavior="single">-->
+<!--        <item-->
+<!--            android:icon="@drawable/ic_one"-->
+<!--            android:title="Sub item 1" />-->
+<!--        <item-->
+<!--            android:icon="@drawable/ic_two"-->
+<!--            android:title="Sub item 2" />-->
+<!--    </group>-->
 
 </menu>
