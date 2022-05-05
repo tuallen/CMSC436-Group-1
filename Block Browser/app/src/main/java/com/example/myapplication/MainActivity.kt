@@ -36,17 +36,17 @@ class MainActivity : AppCompatActivity() {
         // Set a Toolbar to replace the ActionBar.
         toolbar = findViewById<View>(com.example.myapplication.R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         // Find our drawer view
-        mDrawer = findViewById<DrawerLayout>(com.example.myapplication.R.id.drawer_layout);
-        drawerToggle = setupDrawerToggle();
+        mDrawer = findViewById<DrawerLayout>(com.example.myapplication.R.id.drawer_layout)
+        drawerToggle = setupDrawerToggle()
         // Setup toggle to display hamburger icon with nice animation
-        drawerToggle?.isDrawerIndicatorEnabled = true;
-        drawerToggle?.syncState();
+        drawerToggle?.isDrawerIndicatorEnabled = true
+        drawerToggle?.syncState()
         // Tie DrawerLayout events to the ActionBarToggle
-        mDrawer!!.addDrawerListener(drawerToggle!!);
+        mDrawer!!.addDrawerListener(drawerToggle!!)
         // Setup drawer view
-        nvDrawer = findViewById(com.example.myapplication.R.id.nvView);
+        nvDrawer = findViewById(com.example.myapplication.R.id.nvView)
         setupDrawerContent(nvDrawer!!)
 
     }
