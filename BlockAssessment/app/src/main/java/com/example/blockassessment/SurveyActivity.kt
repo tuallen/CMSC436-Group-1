@@ -88,7 +88,7 @@ class SurveyActivity : AppCompatActivity() {
         )
 
         // Push assessment to Firebase
-        db.collection("reviews")
+        db.collection("assessments")
             .add(assessment)
             .addOnSuccessListener { documentReference ->
                 Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
@@ -98,6 +98,52 @@ class SurveyActivity : AppCompatActivity() {
                 Log.w(TAG, "Error adding document", e)
                 Toast.makeText(applicationContext, SUBMIT_FAILED, Toast.LENGTH_LONG).show()
             }
+
+        var housing : Double? = null
+        var neighborhood : Double?  = null
+        var transportation : Double?  = null
+        var environment : Double?  = null
+        var health : Double?  = null
+        var engagement : Double?  = null
+        var opportunity : Double?  = null
+        val mBlockCollection = db.collection("assessments").whereEqualTo("block", "test")
+        mBlockCollection.get()
+            .addOnSuccessListener { result ->
+                val numDocs = result.size()
+                if (numDocs > 0) {
+
+                    neighborhood = 0.0
+                    transportation = 0.0
+                    environment = 0.0
+                    health = 0.0
+                    engagement = 0.0
+                    opportunity = 0.0
+                    for (document in result) {
+                        if (document.getLong("housing") != null){
+                            if (housing == null) housing = 0.0
+                            housing!! += document.getDouble("housing")!!
+                        }
+                        if (document.getLong("neighborhood") != null) neighborhood += document.getLong("neighborhood")!!
+                        if (document.getLong("transportation") != null) transportation += document.getLong("transportation")!!
+                        if (document.getLong("environment") != null) environment += document.getLong("environment")!!
+                        if (document.getLong("health") != null) health += document.getLong("health")!!
+                        if (document.getLong("engagement") != null) engagement += document.getLong("engagement")!!
+                        if (document.getLong("opportunity") != null) opportunity += document.getLong("opportunity")!!
+                    }
+                    housing /= result.size()
+                    neighborhood /= result.size()
+                    transportation /= result.size()
+                    transportation /= result.size()
+                    health /= result.size()
+                    engagement /= result.size()
+                    opportunity /= result.size()
+                }
+
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents.", exception)
+            }
+        if (mBlockCollection.si)
 
         // Close activity // TODO: Intent, if necessary
         Log.d(TAG, "Finished enterClicked()")
