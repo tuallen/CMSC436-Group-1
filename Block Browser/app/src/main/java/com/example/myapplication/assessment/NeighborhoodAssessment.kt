@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -23,6 +24,7 @@ class NeighborhoodAssessment : Fragment() {
     private lateinit var blockID: String;
     private lateinit var deviceID: String;
     private lateinit var db : FirebaseFirestore
+    private var mDoc : QueryDocumentSnapshot? = null
 
     private lateinit var mHousing: EditText
     private lateinit var mNeighborhood: EditText
@@ -38,17 +40,17 @@ class NeighborhoodAssessment : Fragment() {
     private lateinit var mCallback: Context
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        Log.d(TAG, "Entered onCreate()")
+        Log.d(TAG, "Entered onCreateView()")
+
         root = inflater.inflate(com.example.myapplication.R.layout.assess_layout, container, false)
         deviceID = Settings.Secure.getString(mCallback.contentResolver, Settings.Secure.ANDROID_ID)
+        db = Firebase.firestore // Reference to database
+
         // Get block ID
         blockID = "TEST"
 //        if (intent.hasExtra("blockID")) {
 //            blockID = intent.getStringExtra("blockID").toString()
 //        }
-        db = Firebase.firestore // Reference to database
-//        db.collection("assessments")
-
 
         // Set title
 //        mCallback.title = if (intent.hasExtra("blockName")) { // TODO: blockName
@@ -66,6 +68,7 @@ class NeighborhoodAssessment : Fragment() {
         mEngagement = root.findViewById<View>(R.id.editTextEngagement) as EditText
         mOpportunity = root.findViewById<View>(R.id.editTextOpportunity) as EditText
         mReview = root.findViewById<View>(R.id.editTextReview) as EditText
+
         // Limit score EditText fields to integers from 1 to 100
         mHousing.filters = arrayOf<InputFilter>(MinMaxFilter(1, 100))
         mNeighborhood.filters = arrayOf<InputFilter>(MinMaxFilter(1, 100))
@@ -80,8 +83,10 @@ class NeighborhoodAssessment : Fragment() {
         mSubmitButton.setOnClickListener {
             enterClicked()
         }
-        Log.d(TAG, "Finished onCreate()")
 
+        loadData() // load existing assessment
+
+        Log.d(TAG, "Finished onCreate()")
         return root
     }
 
@@ -91,39 +96,91 @@ class NeighborhoodAssessment : Fragment() {
         catch (e: ClassCastException) { throw ClassCastException("$context must implement SelectionListener") }
     }
 
+    // load existing assessment, if it exists
+    private fun loadData() {
+        db.collection("assessments")
+            .whereEqualTo("device", deviceID)
+            .whereEqualTo("block", blockID)
+            .get()
+            .addOnSuccessListener { result ->
+                if (!result.isEmpty) {
+                    // update EditText fields to existing assessment
+                    mDoc = result.elementAt(0)
+                    if (mDoc!!.getLong("housing") != null) mHousing.setText(mDoc!!.getLong("housing")!!.toString())
+                    if (mDoc!!.getLong("neighborhood") != null) mNeighborhood.setText(mDoc!!.getLong("neighborhood")!!.toString())
+                    if (mDoc!!.getLong("transportation") != null) mTransportation.setText(mDoc!!.getLong("transportation")!!.toString())
+                    if (mDoc!!.getLong("environment") != null) mEnvironment.setText(mDoc!!.getLong("environment")!!.toString())
+                    if (mDoc!!.getLong("health") != null) mHealth.setText(mDoc!!.getLong("health")!!.toString())
+                    if (mDoc!!.getLong("engagement") != null) mEngagement.setText(mDoc!!.getLong("engagement")!!.toString())
+                    if (mDoc!!.getLong("opportunity") != null) mOpportunity.setText(mDoc!!.getLong("opportunity")!!.toString())
+                    if (mDoc!!.getString("review") != null) mReview.setText(mDoc!!.getString("review")!!)
+                    // Delete all other assessments with the same block and device id
+                    for (document in result) {
+                        if (document != mDoc) document.reference.delete()
+                    }
+                }
+            }
+            .addOnFailureListener{
+                Log.d(TAG, "FAILED")
+            }
+
+    }
+
     // Submit assessment
     private fun enterClicked() {
         Log.d(TAG, "Entered enterClicked()")
 
         // Parse assessment into hashmap
-        val assessment = hashMapOf(
-            "device" to deviceID,
-            "block" to blockID, //TODO: City information,
-            "housing" to Integer.parseInt(mHousing.text.toString()),
-            "neighborhood" to Integer.parseInt(mNeighborhood.text.toString()),
-            "transportation" to Integer.parseInt(mTransportation.text.toString()),
-            "environment" to Integer.parseInt(mEnvironment.text.toString()),
-            "health" to Integer.parseInt(mHealth.text.toString()),
-            "engagement" to Integer.parseInt(mEngagement.text.toString()),
-            "opportunity" to Integer.parseInt(mOpportunity.text.toString()),
-            "review" to mReview.text.toString()
-        )
+        var assessment = HashMap<String, Any>()
+        assessment["device"] = deviceID
+        assessment["block"] = blockID
+        if (mHousing.text.toString() != "") assessment["housing"] = Integer.parseInt(mHousing.text.toString())
+        if (mNeighborhood.text.toString() != "") assessment["neighborhood"] = Integer.parseInt(mNeighborhood.text.toString())
+        if (mTransportation.text.toString() != "") assessment["transportation"] = Integer.parseInt(mTransportation.text.toString())
+        if (mEnvironment.text.toString() != "") assessment["environment"] = Integer.parseInt(mEnvironment.text.toString())
+        if (mHealth.text.toString() != "") assessment["health"] = Integer.parseInt(mHealth.text.toString())
+        if (mEngagement.text.toString() != "") assessment["engagement"] = Integer.parseInt(mEngagement.text.toString())
+        if (mOpportunity.text.toString() != "") assessment["opportunity"] = Integer.parseInt(mOpportunity.text.toString())
 
-        // Push assessment to Firebase
-        db.collection("assessments")
-            .add(assessment)
-            .addOnSuccessListener { documentReference ->
-                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                Toast.makeText(mCallback, SUBMIT_SUCCESS, Toast.LENGTH_LONG).show()
+        // Submit assessment if there is no existing assessment
+        if (assessment.size >= 9) {
+            if (mDoc == null) {
+                if (mReview.text.toString() != "") assessment["review"] = mReview.text.toString()
+                db.collection("assessments")
+                    .add(assessment)
+                    .addOnSuccessListener { documentReference ->
+                        Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                        Toast.makeText(mCallback, SUBMIT_SUCCESS, Toast.LENGTH_LONG).show()
+                        loadData()
+                    }
+                    .addOnFailureListener { e ->
+                        Log.w(TAG, "Error adding document", e)
+                        Toast.makeText(mCallback, SUBMIT_FAILED, Toast.LENGTH_LONG).show()
+                    }
             }
-            .addOnFailureListener { e ->
-                Log.w(TAG, "Error adding document", e)
-                Toast.makeText(mCallback, SUBMIT_FAILED, Toast.LENGTH_LONG).show()
+            // Edit existing assessment
+            else {
+                if (mReview.text.toString() != "") assessment["review"] = mReview.text.toString()
+                mDoc!!.reference
+                    .update(assessment as Map<String, Any>)
+                    .addOnSuccessListener {
+                        Toast.makeText(mCallback, EDIT_SUCCESS, Toast.LENGTH_LONG).show()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(mCallback, EDIT_FAILED, Toast.LENGTH_LONG).show()
+                    }
             }
-
-        // Close activity // TODO: Intent, if necessary
-        Log.d(TAG, "Finished enterClicked()")
-//        finish()
+        }
+        // Delete assessment
+        else if (assessment.size == 2){
+            if (mDoc != null) mDoc!!.reference.delete()
+            mDoc = null
+            Toast.makeText(mCallback, DELETE_SUCCESSFUL, Toast.LENGTH_LONG).show()
+        }
+        // Not filled out
+        else{
+            Toast.makeText(mCallback, NOT_COMPLETE, Toast.LENGTH_LONG).show()
+        }
     }
 
     // Limit EditText field to integers from minValue to maxValue
@@ -165,8 +222,12 @@ class NeighborhoodAssessment : Fragment() {
 
     companion object {
         private const val TAG = "Survey-Activity"
-        private const val SUBMIT_SUCCESS = "Assessment Submitted!"
+        private const val SUBMIT_SUCCESS = "Assessment submitted!"
         private const val SUBMIT_FAILED = "Failed to submit assessment!"
+        private const val EDIT_SUCCESS = "Assessment updated!"
+        private const val EDIT_FAILED = "Failed to update assessment!"
+        private const val DELETE_SUCCESSFUL = "Deleted assessment!"
+        private const val NOT_COMPLETE = "Fill out all score fields to submit, or erase all score fields to delete."
     }
 
 }
