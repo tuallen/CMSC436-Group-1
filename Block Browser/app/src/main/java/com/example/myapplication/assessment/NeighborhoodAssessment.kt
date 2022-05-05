@@ -20,9 +20,9 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class NeighborhoodAssessment : Fragment() {
-    private lateinit var root : View;
-    private lateinit var blockID: String;
-    private lateinit var deviceID: String;
+    private lateinit var root : View
+    private lateinit var blockID: String
+    private lateinit var deviceID: String
     private lateinit var db : FirebaseFirestore
     private var mDoc : QueryDocumentSnapshot? = null
 
@@ -35,28 +35,21 @@ class NeighborhoodAssessment : Fragment() {
     private lateinit var mOpportunity: EditText
     private lateinit var mReview: EditText
     private lateinit var mSubmitButton: Button
+    private lateinit var mDeleteButton: Button
 
     //Whenever you need the context use mCallback (goes with fun onAttach)
     private lateinit var mCallback: Context
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         Log.d(TAG, "Entered onCreateView()")
 
-        root = inflater.inflate(com.example.myapplication.R.layout.assess_layout, container, false)
+        root = inflater.inflate(R.layout.assess_layout, container, false)
         deviceID = Settings.Secure.getString(mCallback.contentResolver, Settings.Secure.ANDROID_ID)
         db = Firebase.firestore // Reference to database
-
         // Get block ID
         blockID = "TEST"
 //        if (intent.hasExtra("blockID")) {
 //            blockID = intent.getStringExtra("blockID").toString()
-//        }
-
-        // Set title
-//        mCallback.title = if (intent.hasExtra("blockName")) { // TODO: blockName
-//            intent.getStringExtra("blockName").toString()
-//        } else {
-//            resources.getString(R.string.default_survey_title)
 //        }
 
         // Initialize EditText fields
@@ -81,7 +74,13 @@ class NeighborhoodAssessment : Fragment() {
         // Initialize submit button
         mSubmitButton = root.findViewById<View>(R.id.buttonSubmitAssessment) as Button
         mSubmitButton.setOnClickListener {
-            enterClicked()
+            submitClicked()
+        }
+
+        // Initialize delete button
+        mDeleteButton = root.findViewById<View>(R.id.buttonDeleteAssessment) as Button
+        mDeleteButton.setOnClickListener {
+            deleteClicked()
         }
 
         loadData() // load existing assessment
@@ -127,11 +126,11 @@ class NeighborhoodAssessment : Fragment() {
     }
 
     // Submit assessment
-    private fun enterClicked() {
+    private fun submitClicked() {
         Log.d(TAG, "Entered enterClicked()")
 
         // Parse assessment into hashmap
-        var assessment = HashMap<String, Any>()
+        val assessment = HashMap<String, Any>()
         assessment["device"] = deviceID
         assessment["block"] = blockID
         if (mHousing.text.toString() != "") assessment["housing"] = Integer.parseInt(mHousing.text.toString())
@@ -144,8 +143,8 @@ class NeighborhoodAssessment : Fragment() {
 
         // Submit assessment if there is no existing assessment
         if (assessment.size >= 9) {
+            if (mReview.text.toString() != "") assessment["review"] = mReview.text.toString()
             if (mDoc == null) {
-                if (mReview.text.toString() != "") assessment["review"] = mReview.text.toString()
                 db.collection("assessments")
                     .add(assessment)
                     .addOnSuccessListener { documentReference ->
@@ -160,7 +159,6 @@ class NeighborhoodAssessment : Fragment() {
             }
             // Edit existing assessment
             else {
-                if (mReview.text.toString() != "") assessment["review"] = mReview.text.toString()
                 mDoc!!.reference
                     .update(assessment as Map<String, Any>)
                     .addOnSuccessListener {
@@ -173,14 +171,30 @@ class NeighborhoodAssessment : Fragment() {
         }
         // Delete assessment
         else if (assessment.size == 2){
-            if (mDoc != null) mDoc!!.reference.delete()
-            mDoc = null
-            Toast.makeText(mCallback, DELETE_SUCCESSFUL, Toast.LENGTH_LONG).show()
+            deleteClicked()
         }
         // Not filled out
         else{
             Toast.makeText(mCallback, NOT_COMPLETE, Toast.LENGTH_LONG).show()
         }
+    }
+
+    // Delete assessment
+    private fun deleteClicked() {
+        // Delete from database
+        if (mDoc != null) mDoc!!.reference.delete()
+        mDoc = null
+
+        // Reset fields
+        mHousing.setText("")
+        mNeighborhood.setText("")
+        mTransportation.setText("")
+        mEnvironment.setText("")
+        mHealth.setText("")
+        mEngagement.setText("")
+        mOpportunity.setText("")
+        mReview.setText("")
+        Toast.makeText(mCallback, DELETE_SUCCESSFUL, Toast.LENGTH_LONG).show()
     }
 
     // Limit EditText field to integers from minValue to maxValue

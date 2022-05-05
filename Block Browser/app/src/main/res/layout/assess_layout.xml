@@ -9,8 +9,8 @@
         android:id="@+id/textViewHousing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
         android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"
         android:text="Housing"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -151,8 +151,8 @@
         android:id="@+id/textViewReview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My Review"
         android:layout_marginTop="40dp"
+        android:text="My Review"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextOpportunity" />
@@ -161,8 +161,8 @@
         android:id="@+id/editTextReview"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="25dp"
         android:ems="10"
         android:gravity="start|top"
@@ -177,11 +177,24 @@
         android:id="@+id/buttonSubmitAssessment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="50dp"
         android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonDeleteAssessment"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonDeleteAssessment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="50dp"
+        android:text="delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/buttonSubmitAssessment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

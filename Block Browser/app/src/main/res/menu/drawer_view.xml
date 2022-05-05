@@ -12,6 +12,6 @@
         <item
             android:id="@+id/assess"
             android:icon="@drawable/ic_three"
-            android:title="Neighborhood Assessments" />
+            android:title="My Assessment" />
     </group>
 </menu>
