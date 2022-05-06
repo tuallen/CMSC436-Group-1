@@ -26,24 +26,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="100"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:weightSum="100">
 
         <LinearLayout
             android:id="@+id/map_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="35"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_weight="35">
 
-            <com.google.android.gms.maps.MapView xmlns:android="http://schemas.android.com/apk/res/android"
+            <com.google.android.gms.maps.MapView
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/mapHub"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="match_parent" />
         </LinearLayout>
 
         <LinearLayout
@@ -53,9 +48,7 @@
             android:layout_weight="20"
             android:orientation="horizontal"
             android:weightSum="2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/map_container"
-            app:layout_constraintBottom_toTopOf="@+id/hubTvAssessments">
+            app:layout_constraintStart_toStartOf="parent">
 
             <LinearLayout
                 android:id="@+id/column1"
@@ -275,7 +268,7 @@
         <ScrollView
             android:id="@+id/hubScrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="40"
             app:layout_constrainedHeight="true">
 
@@ -285,6 +278,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
         </ScrollView>
+
     </LinearLayout>
 
     <!--

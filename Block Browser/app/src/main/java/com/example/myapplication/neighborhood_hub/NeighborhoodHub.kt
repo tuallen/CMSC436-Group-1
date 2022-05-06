@@ -1,6 +1,8 @@
 package com.example.myapplication.neighborhood_hub
 
 import android.content.Context
+import android.location.Address
+import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,6 +21,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.io.IOException
 
 
 class NeighborhoodHub: Fragment(), OnMapReadyCallback {
@@ -63,6 +66,11 @@ class NeighborhoodHub: Fragment(), OnMapReadyCallback {
         //btnMap = root.findViewById(R.id.mapBtn)
         //btnMap.setOnClickListener {  }
         mMapView = root.findViewById(R.id.mapHub)
+        /*
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+        */
         mMapView.onCreate(savedInstanceState)
         mMapView.getMapAsync(this)
 
@@ -136,7 +144,7 @@ class NeighborhoodHub: Fragment(), OnMapReadyCallback {
                             ViewGroup.LayoutParams.WRAP_CONTENT,
                             7.0f
                         )
-                        textViewResultParams.setMargins(70, 20, 70, 0)
+                        textViewResultParams.setMargins(70, 0, 70, 0)
                         textViewResult.layoutParams = textViewResultParams
                         textViewResult.text = review // + ratingString
                         sReviewScroll.addView(textViewResult)
@@ -177,7 +185,7 @@ class NeighborhoodHub: Fragment(), OnMapReadyCallback {
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         7.0f
                     )
-                    textViewResultParams.setMargins(70, 20, 70, 0)
+                    textViewResultParams.setMargins(70, 0, 70, 0)
                     textViewResult.layoutParams = textViewResultParams
                     textViewResult.text = "No reviews yet!"
                     sReviewScroll.addView(textViewResult)
@@ -191,26 +199,49 @@ class NeighborhoodHub: Fragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         Log.i(TAG, "Entered onMapReady")
         mMap = googleMap
+        //map.setMinZoomPreference(6.0f)
+        //map.setMaxZoomPreference(14.0f)
 
+        // TODO: Change address to neighborhood id
+        // Process text for network transmission
+        // https://www.javatpoint.com/kotlin-android-google-map-search-location
+        val neighborhood = "Old Town, College Park"
+        var addressList: List<Address>? = null
+
+        val geoCoder = Geocoder(mCallback)
+        try {
+            addressList = geoCoder.getFromLocationName(neighborhood, 1)
+
+        } catch (e: IOException){
+            Log.e(TAG, "${e.stackTrace}")
+        }
+
+        Log.i(TAG, "${addressList.toString()}")
+        val address = addressList!![0]
+        val latLng = LatLng(address.latitude, address.longitude)
+        mMap.addMarker(MarkerOptions().position(latLng).title(neighborhood))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15F))
+
+
+        /*
+        // Create Intent object for starting Google Maps application
+        val geoIntent = Intent(
+            Intent.ACTION_VIEW, Uri
+                .parse("geo:0,0?q=$address")
+        )
+        */
+
+        /*
         // Add a marker in Sydney and move the camera
         val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+         */
     }
 
     override fun onResume() {
         super.onResume()
         mMapView.onResume()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        mMapView.onStart()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        mMapView.onStop()
     }
 
     override fun onPause() {
