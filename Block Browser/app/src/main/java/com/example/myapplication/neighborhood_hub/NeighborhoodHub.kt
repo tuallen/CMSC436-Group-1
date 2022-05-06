@@ -144,7 +144,7 @@ class NeighborhoodHub: Fragment(), OnMapReadyCallback {
                             ViewGroup.LayoutParams.WRAP_CONTENT,
                             7.0f
                         )
-                        textViewResultParams.setMargins(70, 0, 70, 0)
+                        textViewResultParams.setMargins(70, 20, 70, 0)
                         textViewResult.layoutParams = textViewResultParams
                         textViewResult.text = review // + ratingString
                         sReviewScroll.addView(textViewResult)
