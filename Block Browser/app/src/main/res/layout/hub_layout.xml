@@ -26,49 +26,25 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/hubTvOpportunity"
+                android:id="@+id/hubTvHousing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="20dp"
                 android:layout_weight="7"
-                android:text="Opportunity"
+                android:text="Housing"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hubTvEngagement" />
+                app:layout_constraintTop_toBottomOf="@+id/hubTvNeighborhood" />
 
             <TextView
-                android:id="@+id/hubTvEngagement"
+                android:id="@+id/hubTvNeighborhood"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_weight="7"
-                android:text="Engagement"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hubTvHealth" />
-
-            <TextView
-                android:id="@+id/hubTvHealth"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="20dp"
-                android:layout_weight="7"
-                android:text="Health"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hubTvEnviro" />
-
-            <TextView
-                android:id="@+id/hubTvEnviro"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="20dp"
-                android:layout_weight="7"
-                android:text="Environment"
+                android:text="Neighborhood"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/hubTvTransportation" />
@@ -78,33 +54,57 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_weight="7"
                 android:text="Transportation"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hubTVNeighborhood" />
+                app:layout_constraintTop_toBottomOf="@+id/hubTvEnvironment" />
 
             <TextView
-                android:id="@+id/hubTVNeighborhood"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="20dp"
-                android:layout_weight="7"
-                android:text="Neighborhood"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hubTVHousing" />
-
-            <TextView
-                android:id="@+id/hubTVHousing"
+                android:id="@+id/hubTvEnvironment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_weight="7"
-                android:text="Housing"
+                android:text="Environment"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hubTvHealth" />
+
+            <TextView
+                android:id="@+id/hubTvHealth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="7"
+                android:text="Health"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hubTvEngagement" />
+
+            <TextView
+                android:id="@+id/hubTvEngagement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="7"
+                android:text="Engagement"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hubTvOpportunity" />
+
+            <TextView
+                android:id="@+id/hubTvOpportunity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="7"
+                android:text="Opportunity"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -136,56 +136,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/opportunityScore"
+                android:id="@+id/neighborhoodScore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="25dp"
                 android:layout_weight="7"
                 android:text="score"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/hubTvOpportunity"
-                app:layout_constraintTop_toBottomOf="@+id/engagementScore" />
-
-            <TextView
-                android:id="@+id/engagementScore"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="25dp"
-                android:layout_weight="7"
-                android:text="score"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/hubTvEngagement"
-                app:layout_constraintTop_toBottomOf="@+id/healthScore" />
-
-            <TextView
-                android:id="@+id/healthScore"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="25dp"
-                android:layout_weight="7"
-                android:text="score"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/hubTvHealth"
-                app:layout_constraintTop_toBottomOf="@+id/environmentScore" />
-
-            <TextView
-                android:id="@+id/environmentScore"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="25dp"
-                android:layout_weight="7"
-                android:text="score"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/hubTvEnviro"
+                app:layout_constraintStart_toEndOf="@+id/hubTvNeighborhood"
                 app:layout_constraintTop_toBottomOf="@+id/transportationScore" />
 
             <TextView
@@ -193,26 +154,65 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="25dp"
                 android:layout_weight="7"
                 android:text="score"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/hubTvTransportation"
-                app:layout_constraintTop_toBottomOf="@+id/neighborhoodScore" />
+                app:layout_constraintTop_toBottomOf="@+id/healthScore" />
 
             <TextView
-                android:id="@+id/neighborhoodScore"
+                android:id="@+id/environmentScore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="25dp"
                 android:layout_weight="7"
                 android:text="score"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/hubTVNeighborhood"
-                app:layout_constraintTop_toBottomOf="@+id/housingScore" />
+                app:layout_constraintStart_toEndOf="@+id/hubTvEnvironment"
+                app:layout_constraintTop_toBottomOf="@+id/healthScore" />
+
+            <TextView
+                android:id="@+id/healthScore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="25dp"
+                android:layout_weight="7"
+                android:text="score"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/hubTvHealth"
+                app:layout_constraintTop_toBottomOf="@+id/engagementScore" />
+
+            <TextView
+                android:id="@+id/engagementScore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="25dp"
+                android:layout_weight="7"
+                android:text="score"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/hubTvEngagement"
+                app:layout_constraintTop_toBottomOf="@+id/opportunityScore" />
+
+            <TextView
+                android:id="@+id/opportunityScore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="25dp"
+                android:layout_weight="7"
+                android:text="score"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/hubTvOpportunity"
+                app:layout_constraintTop_toBottomOf="@+id/engagementScore" />
 
         </LinearLayout>
     </LinearLayout>
@@ -235,8 +235,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hubTvAssessments"
         app:layout_constraintBottom_toTopOf="@+id/mapBtn"
@@ -255,7 +255,7 @@
         android:layout_width="117dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="15dp"
         android:text="View Map"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

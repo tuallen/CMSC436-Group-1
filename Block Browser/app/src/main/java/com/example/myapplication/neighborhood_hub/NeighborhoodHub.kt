@@ -113,14 +113,14 @@ class NeighborhoodHub: Fragment(){
                         opportunityAverage += opportunityScore
 
                         // Build Add review to display
-                        val assessmentString = "$review\n" +
-                            "Housing: $housingScore, " +
-                                    "Neighborhood: $neighborhoodScore, " +
-                                    "Transportation: $transportationScore, " +
-                                    "Environment: $environmentScore, " +
-                                    "Health: $healthScore, " +
-                                    "Engagement: $engagementScore, " +
-                                    "Opportunity: $opportunityScore\n"
+                        val assessmentString = "$review\n" //+
+//                            "Housing: $housingScore, " +
+//                                    "Neighborhood: $neighborhoodScore, " +
+//                                    "Transportation: $transportationScore, " +
+//                                    "Environment: $environmentScore, " +
+//                                    "Health: $healthScore, " +
+//                                    "Engagement: $engagementScore, " +
+//                                    "Opportunity: $opportunityScore\n"
 
                         val textViewResult = TextView(mCallback)
                         val textViewResultParams = LinearLayout.LayoutParams(
@@ -128,7 +128,7 @@ class NeighborhoodHub: Fragment(){
                             ViewGroup.LayoutParams.WRAP_CONTENT,
                             7.0f
                         )
-                        textViewResultParams.setMargins(60, 20, 60, 0)
+                        textViewResultParams.setMargins(70, 20, 70, 0)
                         textViewResult.layoutParams = textViewResultParams
                         textViewResult.text = assessmentString
                         sReviewScroll.addView(textViewResult)
