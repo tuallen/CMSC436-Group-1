@@ -5,22 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:id="@+id/reviewScroll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
-    -->
-
     <LinearLayout
         android:id="@+id/hubVertLayout"
         android:layout_width="match_parent"
@@ -34,8 +18,7 @@
             android:layout_height="0dp"
             android:layout_weight="35">
 
-            <com.google.android.gms.maps.MapView
-                xmlns:android="http://schemas.android.com/apk/res/android"
+            <com.google.android.gms.maps.MapView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/mapHub"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
@@ -260,10 +243,9 @@
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
             android:layout_weight="5"
-            android:text="Reviews"
-            android:textStyle="bold"
             android:gravity="center"
-            />
+            android:text="Reviews"
+            android:textStyle="bold" />
 
         <ScrollView
             android:id="@+id/hubScrollView"
@@ -281,16 +263,4 @@
 
     </LinearLayout>
 
-    <!--
-    <Button
-        android:id="@+id/mapBtn"
-        android:layout_width="117dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="15dp"
-        android:text="View Map"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-        -->
 </androidx.constraintlayout.widget.ConstraintLayout>
