@@ -137,17 +137,19 @@ class NeighborhoodHub: Fragment(), OnMapReadyCallback {
                                     "Engagement: $engagementScore, " +
                                     "Opportunity: $opportunityScore\n"
 
-                        // Add text view to reviews
-                        val textViewResult = TextView(mCallback)
-                        val textViewResultParams = LinearLayout.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT,
-                            7.0f
-                        )
-                        textViewResultParams.setMargins(70, 20, 70, 0)
-                        textViewResult.layoutParams = textViewResultParams
-                        textViewResult.text = review // + ratingString
-                        sReviewScroll.addView(textViewResult)
+                        if (review != "") {
+                            // Add text view to reviews
+                            val textViewResult = TextView(mCallback)
+                            val textViewResultParams = LinearLayout.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT,
+                                7.0f
+                            )
+                            textViewResultParams.setMargins(70, 20, 70, 0)
+                            textViewResult.layoutParams = textViewResultParams
+                            textViewResult.text = review // + ratingString
+                            sReviewScroll.addView(textViewResult)
+                        }
                     }
 
                     // Calculate average scores from accumulators
@@ -178,7 +180,10 @@ class NeighborhoodHub: Fragment(), OnMapReadyCallback {
                     sEngagement.text = "No score yet!"
                     sOpportunity.text = "No score yet!"
 
-                    // No reviews yet
+                }
+
+                // No reviews yet
+                if (sReviewScroll.childCount == 0){
                     val textViewResult = TextView(mCallback)
                     val textViewResultParams = LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
