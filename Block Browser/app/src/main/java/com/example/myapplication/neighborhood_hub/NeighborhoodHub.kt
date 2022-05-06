@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
@@ -20,12 +21,13 @@ class NeighborhoodHub: Fragment(){
     //Whenever you need the context use mCallback (goes with fun onAttach)
     private lateinit var mCallback: Context
 
-    private lateinit var root : View
-    private lateinit var blockID: String
-    private lateinit var deviceID: String
+    // Database
     private lateinit var db : FirebaseFirestore
+    private lateinit var blockID: String
 
-    // TextViews to display scores
+    // Views
+    private lateinit var root : View
+    private lateinit var sReviewScroll : LinearLayout
     private lateinit var sHousing: TextView
     private lateinit var sNeighborhood: TextView
     private lateinit var sTransportation: TextView
@@ -41,13 +43,9 @@ class NeighborhoodHub: Fragment(){
 
         Log.d(TAG, "Entered Hub onCreateView()")
 
-        root = inflater.inflate(R.layout.hub_layout, container, false)
-        deviceID = Settings.Secure.getString(mCallback.contentResolver, Settings.Secure.ANDROID_ID)
-        db = Firebase.firestore // Reference to database
-
-        blockID = "TEST"
-
         // Get views
+        root = inflater.inflate(R.layout.hub_layout, container, false)
+        sReviewScroll = root.findViewById<View>(R.id.reviewScroll) as LinearLayout
         sHousing = root.findViewById<View>(R.id.housingScore) as TextView
         sNeighborhood = root.findViewById<View>(R.id.neighborhoodScore) as TextView
         sTransportation = root.findViewById<View>(R.id.transportationScore) as TextView
@@ -59,18 +57,22 @@ class NeighborhoodHub: Fragment(){
         btnMap = root.findViewById(R.id.mapBtn)
         btnMap.setOnClickListener {  }
 
+        // Load data
+        db = Firebase.firestore // Reference to database
+        blockID = "TEST" // This block TODO: Take from search
         loadData()
 
         return root
     }
 
     override fun onAttach(context: Context) {
-            super.onAttach(context)
-            try { mCallback = context }
-            catch (e: ClassCastException) { throw ClassCastException("$context must implement SelectionListener") }
+        // load existing assessment, if it exists
+        super.onAttach(context)
+        try { mCallback = context }
+        catch (e: ClassCastException) { throw ClassCastException("$context must implement SelectionListener") }
     }
 
-    // load existing assessment, if it exists
+    // load existing assessments information
     private fun loadData() {
         Log.d(TAG, "Entered Hub loadData()")
 
@@ -79,6 +81,7 @@ class NeighborhoodHub: Fragment(){
             .get()
             .addOnSuccessListener { result ->
                 if (!result.isEmpty) {
+                    // Average score accumulators
                     var housingAverage = 0.0
                     var neighborhoodAverage = 0.0
                     var transportationAverage = 0.0
@@ -108,21 +111,29 @@ class NeighborhoodHub: Fragment(){
                         engagementAverage += engagementScore
                         opportunityAverage += opportunityScore
 
-                        // Build Add review to display
-                        val assessmentString =
-                            "Housing: $housingScore\n" +
-                                    "Neighborhood: $neighborhoodScore\n" +
-                                    "Transportation: $transportationScore\n" +
-                                    "Environment: $environmentScore\n" +
-                                    "Health: $healthScore\n" +
-                                    "Engagement: $engagementScore\n" +
-                                    "Opportunity: $opportunityScore\n" +
-                                    "Review: $review"
+                        // Build rating string
+                        val ratingString = "\nHousing: $housingScore, " +
+                                    "Neighborhood: $neighborhoodScore, " +
+                                    "Transportation: $transportationScore, " +
+                                    "Environment: $environmentScore, " +
+                                    "Health: $healthScore, " +
+                                    "Engagement: $engagementScore, " +
+                                    "Opportunity: $opportunityScore\n"
 
+                        // Add text view to reviews
                         val textViewResult = TextView(mCallback)
-                        textViewResult.text = assessmentString
-                        //linearLayout.addView(textViewResult)
+                        val textViewResultParams = LinearLayout.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT,
+                            7.0f
+                        )
+                        textViewResultParams.setMargins(70, 20, 70, 0)
+                        textViewResult.layoutParams = textViewResultParams
+                        textViewResult.text = review // + ratingString
+                        sReviewScroll.addView(textViewResult)
                     }
+
+                    // Calculate average scores from accumulators
                     housingAverage /= result.size()
                     neighborhoodAverage /= result.size()
                     transportationAverage /= result.size()
@@ -131,6 +142,7 @@ class NeighborhoodHub: Fragment(){
                     engagementAverage /= result.size()
                     opportunityAverage /= result.size()
 
+                    // Update score text views
                     sHousing.text = housingAverage.toInt().toString()
                     sNeighborhood.text = neighborhoodAverage.toInt().toString()
                     sTransportation.text = transportationAverage.toInt().toString()
@@ -140,19 +152,31 @@ class NeighborhoodHub: Fragment(){
                     sOpportunity.text = opportunityAverage.toInt().toString()
                 }
                 else {
-                    sHousing.text = "No reviews yet."
-                    sNeighborhood.text = "No reviews yet."
-                    sTransportation.text = "No reviews yet."
-                    sEnvironment.text = "No reviews yet."
-                    sHealth.text = "No reviews yet."
-                    sEngagement.text = "No reviews yet."
-                    sOpportunity.text = "No reviews yet."
+                    // No scores yet
+                    sHousing.text = "No score yet!"
+                    sNeighborhood.text = "No score yet!"
+                    sTransportation.text = "No score yet!"
+                    sEnvironment.text = "No score yet!"
+                    sHealth.text = "No score yet!"
+                    sEngagement.text = "No score yet!"
+                    sOpportunity.text = "No score yet!"
+
+                    // No reviews yet
+                    val textViewResult = TextView(mCallback)
+                    val textViewResultParams = LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        7.0f
+                    )
+                    textViewResultParams.setMargins(70, 20, 70, 0)
+                    textViewResult.layoutParams = textViewResultParams
+                    textViewResult.text = "No reviews yet!"
+                    sReviewScroll.addView(textViewResult)
                 }
             }
             .addOnFailureListener{
                 Log.d(TAG, "FAILED")
             }
-
     }
 
     private fun viewMap() {
@@ -183,7 +207,3 @@ class NeighborhoodHub: Fragment(){
     }
 
 }
-
-
-
-
