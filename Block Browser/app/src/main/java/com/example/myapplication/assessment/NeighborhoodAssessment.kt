@@ -140,10 +140,10 @@ class NeighborhoodAssessment : Fragment() {
         if (mHealth.text.toString() != "") assessment["health"] = Integer.parseInt(mHealth.text.toString())
         if (mEngagement.text.toString() != "") assessment["engagement"] = Integer.parseInt(mEngagement.text.toString())
         if (mOpportunity.text.toString() != "") assessment["opportunity"] = Integer.parseInt(mOpportunity.text.toString())
+        assessment["review"] = mReview.text.toString()
 
         // Submit assessment if there is no existing assessment
-        if (assessment.size >= 9) {
-            if (mReview.text.toString() != "") assessment["review"] = mReview.text.toString()
+        if (assessment.size >= 10) {
             if (mDoc == null) {
                 db.collection("assessments")
                     .add(assessment)
@@ -167,10 +167,11 @@ class NeighborhoodAssessment : Fragment() {
                     .addOnFailureListener {
                         Toast.makeText(mCallback, EDIT_FAILED, Toast.LENGTH_LONG).show()
                     }
+                loadData()
             }
         }
         // Delete assessment
-        else if (assessment.size == 2){
+        else if (assessment.size == 3 && assessment["review"] == ""){
             deleteClicked()
         }
         // Not filled out

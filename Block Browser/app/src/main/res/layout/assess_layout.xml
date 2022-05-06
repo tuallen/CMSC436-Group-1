@@ -5,173 +5,214 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textViewHousing"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/assessmentLinLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="25dp"
-        android:text="Housing"
+        android:orientation="vertical"
+        android:weightSum="2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/assessTvHousing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:textStyle="bold"
+                android:text="Housing"
+                android:layout_centerVertical="true"/>
+
+            <EditText
+                android:id="@+id/editTextHousing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:hint="Rate 1-100"
+                android:inputType="number"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="0dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:textStyle="bold"
+                android:text="Neighborhood"
+                android:layout_centerVertical="true"/>
+
+            <EditText
+                android:id="@+id/editTextNeighborhood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:hint="Rate 1-100"
+                android:inputType="number" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="0dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:textStyle="bold"
+                android:text="Transportation"
+                android:layout_centerVertical="true"/>
+
+            <EditText
+                android:id="@+id/editTextTransportation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:hint="Rate 1-100"
+                android:inputType="number"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="0dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:textStyle="bold"
+                android:text="Environment"
+                android:layout_centerVertical="true"/>
+
+            <EditText
+                android:id="@+id/editTextEnvironment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:hint="Rate 1-100"
+                android:inputType="number"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="0dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:textStyle="bold"
+                android:text="Health"
+                android:layout_centerVertical="true"/>
+
+            <EditText
+                android:id="@+id/editTextHealth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:hint="Rate 1-100"
+                android:inputType="number"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="0dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:textStyle="bold"
+                android:text="Engagement"
+                android:layout_centerVertical="true"/>
+
+            <EditText
+                android:id="@+id/editTextEngagement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:hint="Rate 1-100"
+                android:inputType="number"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="0dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:textStyle="bold"
+                android:text="Opportunity"
+                android:layout_centerVertical="true"/>
+
+            <EditText
+                android:id="@+id/editTextOpportunity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:hint="Rate 1-100"
+                android:inputType="number"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/textViewNeighborhood"
+        android:id="@+id/assessTvReview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Neighborhood"
-        app:layout_constraintStart_toStartOf="@+id/textViewHousing"
-        app:layout_constraintTop_toBottomOf="@+id/textViewHousing" />
-
-    <TextView
-        android:id="@+id/textViewTransportation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Transportation"
-        app:layout_constraintStart_toStartOf="@+id/textViewNeighborhood"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNeighborhood" />
-
-    <TextView
-        android:id="@+id/textViewEnvironment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Environment"
-        app:layout_constraintStart_toStartOf="@+id/textViewTransportation"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTransportation" />
-
-    <TextView
-        android:id="@+id/textViewHealth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Health"
-        app:layout_constraintStart_toStartOf="@+id/textViewEnvironment"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEnvironment" />
-
-    <TextView
-        android:id="@+id/textViewEngagement"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Engagement"
-        app:layout_constraintStart_toStartOf="@+id/textViewHealth"
-        app:layout_constraintTop_toBottomOf="@+id/textViewHealth" />
-
-    <TextView
-        android:id="@+id/textViewOpportunity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Opportunity"
-        app:layout_constraintStart_toStartOf="@+id/textViewEngagement"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEngagement" />
-
-    <EditText
-        android:id="@+id/editTextHousing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="25dp"
-        android:ems="10"
-        android:hint="Rate 1-100"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewHousing"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textViewHousing" />
-
-    <EditText
-        android:id="@+id/editTextNeighborhood"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Rate 1-100"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewNeighborhood"
-        app:layout_constraintEnd_toEndOf="@+id/editTextHousing"
-        app:layout_constraintTop_toTopOf="@+id/textViewNeighborhood" />
-
-    <EditText
-        android:id="@+id/editTextTransportation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Rate 1-100"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewTransportation"
-        app:layout_constraintEnd_toEndOf="@+id/editTextNeighborhood"
-        app:layout_constraintTop_toTopOf="@+id/textViewTransportation" />
-
-    <EditText
-        android:id="@+id/editTextEnvironment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Rate 1-100"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewEnvironment"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTransportation"
-        app:layout_constraintTop_toTopOf="@+id/textViewEnvironment" />
-
-    <EditText
-        android:id="@+id/editTextHealth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Rate 1-100"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewHealth"
-        app:layout_constraintEnd_toEndOf="@+id/editTextEnvironment"
-        app:layout_constraintTop_toTopOf="@+id/textViewHealth" />
-
-    <EditText
-        android:id="@+id/editTextEngagement"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Rate 1-100"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewEngagement"
-        app:layout_constraintEnd_toEndOf="@+id/editTextHealth"
-        app:layout_constraintTop_toTopOf="@+id/textViewEngagement" />
-
-    <EditText
-        android:id="@+id/editTextOpportunity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Rate 1-100"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewOpportunity"
-        app:layout_constraintEnd_toEndOf="@+id/editTextEngagement"
-        app:layout_constraintTop_toTopOf="@+id/textViewOpportunity" />
-
-    <TextView
-        android:id="@+id/textViewReview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="My Review"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextOpportunity" />
+        app:layout_constraintTop_toBottomOf="@+id/assessmentLinLayout" />
 
     <EditText
         android:id="@+id/editTextReview"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="25dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="Tell us about your experience!"
-        android:inputType="textMultiLine"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewReview" />
+        app:layout_constraintTop_toBottomOf="@+id/assessTvReview"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSubmitAssessment"
+        app:layout_constrainedHeight="true"
+        android:gravity="left"
+        android:hint="Tell us about your experience!"/>
+
 
     <Button
         android:id="@+id/buttonSubmitAssessment"
@@ -182,7 +223,6 @@
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonDeleteAssessment"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -194,7 +234,6 @@
         android:text="delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/buttonSubmitAssessment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
