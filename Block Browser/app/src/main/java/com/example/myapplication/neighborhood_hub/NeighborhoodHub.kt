@@ -2,22 +2,26 @@ package com.example.myapplication.neighborhood_hub
 
 import android.content.Context
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 
-class NeighborhoodHub: Fragment(){
+class NeighborhoodHub: Fragment(), OnMapReadyCallback {
     //Whenever you need the context use mCallback (goes with fun onAttach)
     private lateinit var mCallback: Context
 
@@ -35,8 +39,10 @@ class NeighborhoodHub: Fragment(){
     private lateinit var sHealth: TextView
     private lateinit var sEngagement: TextView
     private lateinit var sOpportunity: TextView
+    private lateinit var mMapView: MapView
+    //private lateinit var btnMap: Button
 
-    private lateinit var btnMap: Button
+    private lateinit var mMap: GoogleMap
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -54,8 +60,11 @@ class NeighborhoodHub: Fragment(){
         sEngagement = root.findViewById<View>(R.id.engagementScore) as TextView
         sOpportunity = root.findViewById<View>(R.id.opportunityScore) as TextView
 
-        btnMap = root.findViewById(R.id.mapBtn)
-        btnMap.setOnClickListener {  }
+        //btnMap = root.findViewById(R.id.mapBtn)
+        //btnMap.setOnClickListener {  }
+        mMapView = root.findViewById(R.id.mapHub)
+        mMapView.onCreate(savedInstanceState)
+        mMapView.getMapAsync(this)
 
         // Load data
         db = Firebase.firestore // Reference to database
@@ -179,20 +188,8 @@ class NeighborhoodHub: Fragment(){
             }
     }
 
-    private fun viewMap() {
-        /* TODO: Launch viewMap activity
-            if able, make map be a small view on hub
-         */
-        /*
-            // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
-         */
-    }
-
-    /*
     override fun onMapReady(googleMap: GoogleMap) {
+        Log.i(TAG, "Entered onMapReady")
         mMap = googleMap
 
         // Add a marker in Sydney and move the camera
@@ -200,7 +197,36 @@ class NeighborhoodHub: Fragment(){
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
-     */
+
+    override fun onResume() {
+        super.onResume()
+        mMapView.onResume()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mMapView.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mMapView.onStop()
+    }
+
+    override fun onPause() {
+        mMapView.onPause()
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        mMapView.onDestroy()
+        super.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mMapView.onLowMemory()
+    }
 
     companion object {
         private const val TAG = "Hub-Activity"
