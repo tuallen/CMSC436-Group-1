@@ -171,7 +171,10 @@ class NeighborhoodHub: Fragment(), OnMapReadyCallback {
                     sEngagement.text = "No score yet!"
                     sOpportunity.text = "No score yet!"
 
-                    // No reviews yet
+                }
+
+                // No reviews yet
+                if (sReviewScroll.childCount == 0){
                     val textViewResult = TextView(mCallback)
                     val textViewResultParams = LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,

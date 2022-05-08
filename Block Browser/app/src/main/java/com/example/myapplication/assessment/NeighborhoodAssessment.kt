@@ -131,7 +131,7 @@ class NeighborhoodAssessment : Fragment() {
 
         // Parse assessment into hashmap
         val assessment = HashMap<String, Any>()
-        assessment["device"] = "test"
+        assessment["device"] = deviceID
         assessment["block"] = blockID
         if (mHousing.text.toString() != "") assessment["housing"] = Integer.parseInt(mHousing.text.toString())
         if (mNeighborhood.text.toString() != "") assessment["neighborhood"] = Integer.parseInt(mNeighborhood.text.toString())
@@ -143,14 +143,13 @@ class NeighborhoodAssessment : Fragment() {
 
         // Submit assessment if there is no existing assessment
         if (assessment.size >= 9) {
-            if (mReview.text.toString() != "") assessment["review"] = mReview.text.toString()
+            assessment["review"] = mReview.text.toString()
             if (mDoc == null) {
                 db.collection("assessments")
                     .add(assessment)
                     .addOnSuccessListener { documentReference ->
                         Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
                         Toast.makeText(mCallback, SUBMIT_SUCCESS, Toast.LENGTH_LONG).show()
-                        loadData()
                     }
                     .addOnFailureListener { e ->
                         Log.w(TAG, "Error adding document", e)
@@ -168,6 +167,7 @@ class NeighborhoodAssessment : Fragment() {
                         Toast.makeText(mCallback, EDIT_FAILED, Toast.LENGTH_LONG).show()
                     }
             }
+            loadData()
         }
         // Delete assessment
         else if (assessment.size == 2){
