@@ -128,26 +128,19 @@ class NeighborhoodHub: Fragment(), OnMapReadyCallback {
                         engagementAverage += engagementScore
                         opportunityAverage += opportunityScore
 
-                        // Build rating string
-                        val ratingString = "\nHousing: $housingScore, " +
-                                    "Neighborhood: $neighborhoodScore, " +
-                                    "Transportation: $transportationScore, " +
-                                    "Environment: $environmentScore, " +
-                                    "Health: $healthScore, " +
-                                    "Engagement: $engagementScore, " +
-                                    "Opportunity: $opportunityScore\n"
-
-                        // Add text view to reviews
-                        val textViewResult = TextView(mCallback)
-                        val textViewResultParams = LinearLayout.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT,
-                            7.0f
-                        )
-                        textViewResultParams.setMargins(70, 20, 70, 0)
-                        textViewResult.layoutParams = textViewResultParams
-                        textViewResult.text = review // + ratingString
-                        sReviewScroll.addView(textViewResult)
+                        if (review!!.replace("\\s".toRegex(), "") != ""){
+                            // Add text view to reviews
+                            val textViewResult = TextView(mCallback)
+                            val textViewResultParams = LinearLayout.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT,
+                                7.0f
+                            )
+                            textViewResultParams.setMargins(70, 30, 70, 0)
+                            textViewResult.layoutParams = textViewResultParams
+                            textViewResult.text = review // + ratingString
+                            sReviewScroll.addView(textViewResult)
+                        }
                     }
 
                     // Calculate average scores from accumulators
@@ -185,7 +178,7 @@ class NeighborhoodHub: Fragment(), OnMapReadyCallback {
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         7.0f
                     )
-                    textViewResultParams.setMargins(70, 0, 70, 0)
+//                    textViewResultParams.setMargins(70, 0, 70, 0)
                     textViewResult.layoutParams = textViewResultParams
                     textViewResult.text = "No reviews yet!"
                     sReviewScroll.addView(textViewResult)
