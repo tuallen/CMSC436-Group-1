@@ -142,7 +142,7 @@ class NeighborhoodAssessment : Fragment() {
 
         // Parse assessment into hashmap
         val assessment = HashMap<String, Any>()
-        assessment["device"] = "test"
+        assessment["device"] = deviceID
         assessment["block"] = blockID
         if (mHousing.text.toString() != "") assessment["housing"] = Integer.parseInt(mHousing.text.toString())
         if (mNeighborhood.text.toString() != "") assessment["neighborhood"] = Integer.parseInt(mNeighborhood.text.toString())
