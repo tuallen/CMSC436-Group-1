@@ -1,6 +1,8 @@
 package com.example.myapplication.neighborhood_hub
 
 import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
@@ -12,6 +14,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
+import com.example.myapplication.SearchActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -27,6 +30,9 @@ import java.io.IOException
 class NeighborhoodHub: Fragment(), OnMapReadyCallback {
     //Whenever you need the context use mCallback (goes with fun onAttach)
     private lateinit var mCallback: Context
+
+    // Shared Preferences
+    private lateinit var mPrefs : SharedPreferences
 
     // Database
     private lateinit var db : FirebaseFirestore
@@ -75,8 +81,19 @@ class NeighborhoodHub: Fragment(), OnMapReadyCallback {
         mMapView.getMapAsync(this)
 
         // Load data
+        Log.d(TAG, "HERE1")
         db = Firebase.firestore // Reference to database
-        blockID = "TEST" // This block TODO: Take from search
+        mPrefs = mCallback.getSharedPreferences("block", Context.MODE_PRIVATE)
+        val neighborhood = mPrefs.getString("neighborhood", null)
+        val city = mPrefs.getString("city", null)
+        if (neighborhood == null || city == null) {
+            val intent = Intent(activity, SearchActivity::class.java)
+            startActivity(intent)
+        }
+        else{
+            blockID = "$neighborhood, $city"
+        }
+        activity?.title = blockID
         loadData()
 
         return root

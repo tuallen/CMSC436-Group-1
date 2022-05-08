@@ -1,6 +1,8 @@
 package com.example.myapplication.assessment
 
 import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.provider.Settings
 import android.text.InputFilter
@@ -14,6 +16,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
+import com.example.myapplication.SearchActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
@@ -26,6 +29,8 @@ class NeighborhoodAssessment : Fragment() {
     private lateinit var db : FirebaseFirestore
     private var mDoc : QueryDocumentSnapshot? = null
 
+    // Shared Preferences
+    private lateinit var mPrefs : SharedPreferences
     private lateinit var mHousing: EditText
     private lateinit var mNeighborhood: EditText
     private lateinit var mTransportation: EditText
@@ -47,10 +52,16 @@ class NeighborhoodAssessment : Fragment() {
         deviceID = Settings.Secure.getString(mCallback.contentResolver, Settings.Secure.ANDROID_ID)
         db = Firebase.firestore // Reference to database
         // Get block ID
-        blockID = "TEST"
-//        if (intent.hasExtra("blockID")) {
-//            blockID = intent.getStringExtra("blockID").toString()
-//        }
+        mPrefs = mCallback.getSharedPreferences("block", Context.MODE_PRIVATE)
+        val neighborhood = mPrefs.getString("neighborhood", null)
+        val city = mPrefs.getString("city", null)
+        if (neighborhood == null || city == null) {
+            val intent = Intent(activity, SearchActivity::class.java)
+            startActivity(intent)
+        }
+        else{
+            blockID = "$neighborhood, $city"
+        }
 
         // Initialize EditText fields
         mHousing = root.findViewById<View>(R.id.editTextHousing) as EditText
@@ -131,7 +142,7 @@ class NeighborhoodAssessment : Fragment() {
 
         // Parse assessment into hashmap
         val assessment = HashMap<String, Any>()
-        assessment["device"] = deviceID
+        assessment["device"] = "test"
         assessment["block"] = blockID
         if (mHousing.text.toString() != "") assessment["housing"] = Integer.parseInt(mHousing.text.toString())
         if (mNeighborhood.text.toString() != "") assessment["neighborhood"] = Integer.parseInt(mNeighborhood.text.toString())
@@ -143,13 +154,14 @@ class NeighborhoodAssessment : Fragment() {
 
         // Submit assessment if there is no existing assessment
         if (assessment.size >= 9) {
-            assessment["review"] = mReview.text.toString()
+            if (mReview.text.toString() != "") assessment["review"] = mReview.text.toString()
             if (mDoc == null) {
                 db.collection("assessments")
                     .add(assessment)
                     .addOnSuccessListener { documentReference ->
                         Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
                         Toast.makeText(mCallback, SUBMIT_SUCCESS, Toast.LENGTH_LONG).show()
+                        loadData()
                     }
                     .addOnFailureListener { e ->
                         Log.w(TAG, "Error adding document", e)
@@ -167,7 +179,6 @@ class NeighborhoodAssessment : Fragment() {
                         Toast.makeText(mCallback, EDIT_FAILED, Toast.LENGTH_LONG).show()
                     }
             }
-            loadData()
         }
         // Delete assessment
         else if (assessment.size == 2){
@@ -245,4 +256,3 @@ class NeighborhoodAssessment : Fragment() {
     }
 
 }
-

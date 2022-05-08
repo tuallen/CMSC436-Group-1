@@ -1,6 +1,9 @@
 package com.example.myapplication
 
 import android.R
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -18,6 +21,7 @@ import com.google.android.material.navigation.NavigationView
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var mPrefs : SharedPreferences
     private var mDrawer: DrawerLayout? = null
     private var toolbar: Toolbar? = null
     private var nvDrawer: NavigationView? = null
@@ -29,6 +33,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.example.myapplication.R.layout.activity_main)
+
+//        mPrefs = getPreferences(Context.MODE_PRIVATE) // initialize saved preferences
+//        // Launch search activity if there is no neighborhood or city
+//        var neighborhood = mPrefs.getString("neighborhood", null)
+//        var city = mPrefs.getString("city", null)
+//        if (neighborhood != null || city != null) {
+//            val intent = Intent(this, SearchActivity::class.java)
+//            startActivity(intent)
+//        }
 
         val fragmentManager: FragmentManager = supportFragmentManager
         fragmentManager.beginTransaction().replace(com.example.myapplication.R.id.flContent, NeighborhoodHub()).commit()
