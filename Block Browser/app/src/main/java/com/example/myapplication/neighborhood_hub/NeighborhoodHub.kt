@@ -218,7 +218,7 @@ class NeighborhoodHub: Fragment(), OnMapReadyCallback {
         // TODO: Change address to neighborhood id
         // Process text for network transmission
         // https://www.javatpoint.com/kotlin-android-google-map-search-location
-        val neighborhood = "Old Town, College Park"
+        val neighborhood = blockID
         var addressList: List<Address>? = null
 
         val geoCoder = Geocoder(mCallback)

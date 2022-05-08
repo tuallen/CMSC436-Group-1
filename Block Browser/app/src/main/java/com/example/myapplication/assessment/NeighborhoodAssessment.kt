@@ -154,7 +154,7 @@ class NeighborhoodAssessment : Fragment() {
 
         // Submit assessment if there is no existing assessment
         if (assessment.size >= 9) {
-            if (mReview.text.toString() != "") assessment["review"] = mReview.text.toString()
+            if (mReview.text.toString() != "") assessment["review"] = mReview.text.toString().replace("\\s+".toRegex(), " ").trim()
             if (mDoc == null) {
                 db.collection("assessments")
                     .add(assessment)
