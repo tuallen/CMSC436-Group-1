@@ -16,6 +16,7 @@ import com.example.myapplication.MainActivity
 import com.example.myapplication.R
 import com.example.myapplication.SearchActivity
 import com.example.myapplication.neighborhood_hub.NeighborhoodHub
+import java.util.regex.Pattern
 
 class Search() : Fragment() {
     private lateinit var root : View
@@ -46,8 +47,8 @@ class Search() : Fragment() {
 
         mHubButton.setOnClickListener{
             // Change neighborhood and city
-            neighborhood = mNeighborhoodEditText.text.toString().replace("\\s+".toRegex(), " ").trim()
-            city = mCityEditText.text.toString().replace("\\s+".toRegex(), " ").trim()
+            neighborhood = capitalize(mNeighborhoodEditText.text.toString()).replace("\\s+".toRegex(), " ").trim()
+            city = capitalize(mCityEditText.text.toString()).replace("\\s+".toRegex(), " ").trim()
             if (neighborhood!!.replace("\\s".toRegex(), "") != "" && city!!.replace("\\s".toRegex(), "") != "") {
                 var editor = mPrefs.edit()
                 editor.putString("neighborhood", neighborhood)
@@ -67,6 +68,16 @@ class Search() : Fragment() {
         super.onAttach(context)
         try { mCallback = context }
         catch (e: ClassCastException) { throw ClassCastException("$context must implement SelectionListener") }
+    }
+
+    private fun capitalize(str: String?): String {
+        val sb = StringBuffer()
+        val matcher = Pattern.compile("\\b(\\w)").matcher(str)
+        while (matcher.find()) {
+            matcher.appendReplacement(sb, matcher.group(1).toUpperCase())
+        }
+        matcher.appendTail(sb)
+        return sb.toString()
     }
 
     companion object {

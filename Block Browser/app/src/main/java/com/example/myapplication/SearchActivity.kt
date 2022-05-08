@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.example.myapplication.assessment.NeighborhoodAssessment
+import java.util.regex.Pattern
 
 class SearchActivity : AppCompatActivity() {
     private lateinit var mPrefs : SharedPreferences
@@ -39,8 +40,8 @@ class SearchActivity : AppCompatActivity() {
 
         mHubButton.setOnClickListener{
             // Change neighborhood and city
-            neighborhood = mNeighborhoodEditText.text.toString()
-            city = mCityEditText.text.toString()
+            neighborhood = capitalize(mNeighborhoodEditText.text.toString()).replace("\\s+".toRegex(), " ").trim()
+            city = capitalize(mCityEditText.text.toString()).replace("\\s+".toRegex(), " ").trim()
             if (neighborhood!!.replace("\\s".toRegex(), "") != "" && city!!.replace("\\s".toRegex(), "") != "") {
                 var editor = mPrefs.edit()
                 editor.putString("neighborhood", neighborhood)
@@ -55,6 +56,16 @@ class SearchActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    private fun capitalize(str: String?): String {
+        val sb = StringBuffer()
+        val matcher = Pattern.compile("\\b(\\w)").matcher(str)
+        while (matcher.find()) {
+            matcher.appendReplacement(sb, matcher.group(1).toUpperCase())
+        }
+        matcher.appendTail(sb)
+        return sb.toString()
     }
 
     companion object {
