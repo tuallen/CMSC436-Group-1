@@ -62,7 +62,7 @@ class NeighborhoodAssessment : Fragment() {
         }
 
         // Get block ID
-//        blockID = "TEST"
+        blockID = "TEST"
 
         // Initialize EditText fields
         mHousing = root.findViewById<View>(R.id.editTextHousing) as EditText
