@@ -10,12 +10,16 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.R
 import com.example.myapplication.assessment.NeighborhoodAssessment
+import com.example.myapplication.neighborhood_hub.NeighborhoodHub
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.util.List.of
 import java.util.regex.Pattern
+
 
 
 class Search() : Fragment() {
@@ -44,21 +48,25 @@ class Search() : Fragment() {
                 var i = search.query.toString()
                 var temp: String = i
                 blockID = i
-                var b: Boolean = Pattern.matches("\\s?[a-zA-Z\\s]*,\\s?[a-zA-Z\\s]*\\s?",i )
-//                db.collection("assessments")
-//                    .whereEqualTo("block", blockID)
-//                    .get()
-//                    .addOnSuccessListener {result ->
-////                        sendToHub()
-//                        if (!result.isEmpty) {
-//                            Log.i("TAG", "tarr")
-//                        }
-//                        if(result.isEmpty) {
-//                            Log.i("TAG", "tarr")
-//                        }
-//                    }
+                var b: Boolean = Pattern.matches("\\s?[a-zA-Z\\s]*, \\s?[a-zA-Z\\s]*\\s?", i )
+
+
                 if(b){
-                    sendToAssessments()
+                    db.collection("assessments")
+                        .get()
+                        .addOnSuccessListener { result ->
+                            if (!result.isEmpty) {
+                                // Process all assessments for this block
+                                for (document in result) {
+                                    if (document.getString("block") == blockID) {
+                                        Log.i("Tag", "tarr222")
+                                        sendToHub()
+                                    }
+                                }
+                            }else{
+                                sendToAssessments()
+                            }
+                        }
                 }else{
                     Toast.makeText(mCallback, "Please follow the format \n \"Street Name, City Name\"", Toast.LENGTH_LONG).show()
                 }
@@ -82,6 +90,17 @@ class Search() : Fragment() {
         bundle.putString("BlockID", blockID)
         val fragment = NeighborhoodAssessment()
         fragment.arguments = bundle
+        getActivity()?.getSupportFragmentManager()?.beginTransaction()
+            ?.replace(R.id.flContent, fragment, "findThisFragment")
+            ?.addToBackStack(null)
+            ?.commit();
+    }
+
+    fun sendToHub(){
+        var bundle2 = Bundle()
+        bundle2.putString("BlockID", blockID)
+        val fragment = NeighborhoodHub()
+        fragment.arguments = bundle2
         getActivity()?.getSupportFragmentManager()?.beginTransaction()
             ?.replace(R.id.flContent, fragment, "findThisFragment")
             ?.addToBackStack(null)

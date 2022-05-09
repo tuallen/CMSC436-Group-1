@@ -75,10 +75,16 @@ class NeighborhoodHub: Fragment(), OnMapReadyCallback {
         */
         mMapView.onCreate(savedInstanceState)
         mMapView.getMapAsync(this)
+        blockID = "TEST"
 
         // Load data
         db = Firebase.firestore // Reference to database
-        blockID = "TEST" // This block TODO: Take from search
+        val bundle = this.arguments
+        if (bundle != null) {
+            blockID = bundle.getString("BlockID").toString()
+            Log.i("HUB", blockID)
+        }
+
         loadData()
 
         return root

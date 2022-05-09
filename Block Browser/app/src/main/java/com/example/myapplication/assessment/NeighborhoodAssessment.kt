@@ -51,6 +51,7 @@ class NeighborhoodAssessment : Fragment() {
         db = Firebase.firestore // Reference to database
 
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+        blockID = "TEST"
 
         //Block ID from search
         street = root.findViewById(R.id.street_name)
@@ -62,7 +63,6 @@ class NeighborhoodAssessment : Fragment() {
         }
 
         // Get block ID
-        blockID = "TEST"
 
         // Initialize EditText fields
         mHousing = root.findViewById<View>(R.id.editTextHousing) as EditText
