@@ -77,11 +77,8 @@ class NeighborhoodHub: Fragment(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
         */
-        mMapView.onCreate(savedInstanceState)
-        mMapView.getMapAsync(this)
 
         // Load data
-        Log.d(TAG, "HERE1")
         db = Firebase.firestore // Reference to database
         mPrefs = mCallback.getSharedPreferences("block", Context.MODE_PRIVATE)
         val neighborhood = mPrefs.getString("neighborhood", null)
@@ -90,12 +87,17 @@ class NeighborhoodHub: Fragment(), OnMapReadyCallback {
             val intent = Intent(activity, SearchActivity::class.java)
             startActivity(intent)
             activity?.finish()
+            mPrefs = mCallback.getSharedPreferences("block", Context.MODE_PRIVATE)
+            val neighborhood = mPrefs.getString("neighborhood", null)
+            val city = mPrefs.getString("city", null)
         }
         else{
             blockID = "$neighborhood, $city"
         }
         activity?.title = blockID
         loadData()
+        mMapView.onCreate(savedInstanceState)
+        mMapView.getMapAsync(this)
 
         return root
     }
@@ -199,7 +201,7 @@ class NeighborhoodHub: Fragment(), OnMapReadyCallback {
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         7.0f
                     )
-//                    textViewResultParams.setMargins(70, 0, 70, 0)
+                    textViewResultParams.setMargins(70, 30, 70, 0)
                     textViewResult.layoutParams = textViewResultParams
                     textViewResult.text = "No reviews yet!"
                     sReviewScroll.addView(textViewResult)
@@ -235,22 +237,6 @@ class NeighborhoodHub: Fragment(), OnMapReadyCallback {
         val latLng = LatLng(address.latitude, address.longitude)
         mMap.addMarker(MarkerOptions().position(latLng).title(neighborhood))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15F))
-
-
-        /*
-        // Create Intent object for starting Google Maps application
-        val geoIntent = Intent(
-            Intent.ACTION_VIEW, Uri
-                .parse("geo:0,0?q=$address")
-        )
-        */
-
-        /*
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
-         */
     }
 
     override fun onResume() {
