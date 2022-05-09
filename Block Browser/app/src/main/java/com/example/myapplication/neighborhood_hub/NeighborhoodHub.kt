@@ -89,6 +89,7 @@ class NeighborhoodHub: Fragment(), OnMapReadyCallback {
         if (neighborhood == null || city == null) {
             val intent = Intent(activity, SearchActivity::class.java)
             startActivity(intent)
+            activity?.finish()
         }
         else{
             blockID = "$neighborhood, $city"
