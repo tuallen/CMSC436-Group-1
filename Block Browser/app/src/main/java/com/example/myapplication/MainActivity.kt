@@ -15,7 +15,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.myapplication.assessment.NeighborhoodAssessment
-import com.example.myapplication.map.MapFrag
 import com.example.myapplication.neighborhood_hub.NeighborhoodHub
 import com.example.myapplication.search.Search
 import com.google.android.material.navigation.NavigationView
@@ -79,7 +78,6 @@ class MainActivity : AppCompatActivity() {
             com.example.myapplication.R.id.hub -> NeighborhoodHub()
             com.example.myapplication.R.id.search -> Search()
             com.example.myapplication.R.id.assess -> NeighborhoodAssessment()
-            com.example.myapplication.R.id.map -> MapFrag()
             else -> NeighborhoodHub()
         }
         try {

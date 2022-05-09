@@ -93,10 +93,6 @@ class NeighborhoodHub: Fragment(), OnMapReadyCallback {
         }
         else{
             blockID = "$neighborhood, $city"
-            val bundle = this.arguments
-            if (bundle != null) {
-                blockID = bundle.getString("BlockID").toString()
-            }
         }
         activity?.title = blockID
         loadData()
@@ -237,16 +233,10 @@ class NeighborhoodHub: Fragment(), OnMapReadyCallback {
         }
 
         Log.i(TAG, "${addressList.toString()}")
-        if (addressList != null && addressList.isNotEmpty()) {
-            val address = addressList!![0]
-            val latLng = LatLng(address.latitude, address.longitude)
-            mMap.addMarker(MarkerOptions().position(latLng).title(neighborhood))
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15F))
-        } else {
-            val camStart = LatLng(39.0, -77.0)
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(camStart, 5F))
-        }
-
+        val address = addressList!![0]
+        val latLng = LatLng(address.latitude, address.longitude)
+        mMap.addMarker(MarkerOptions().position(latLng).title(neighborhood))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15F))
     }
 
     override fun onResume() {
