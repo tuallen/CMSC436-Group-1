@@ -11,13 +11,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import org.w3c.dom.Text
 
 class NeighborhoodAssessment : Fragment() {
     private lateinit var root : View
@@ -36,7 +39,7 @@ class NeighborhoodAssessment : Fragment() {
     private lateinit var mReview: EditText
     private lateinit var mSubmitButton: Button
     private lateinit var mDeleteButton: Button
-
+    private lateinit var street: TextView
     //Whenever you need the context use mCallback (goes with fun onAttach)
     private lateinit var mCallback: Context
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -46,11 +49,20 @@ class NeighborhoodAssessment : Fragment() {
         root = inflater.inflate(R.layout.assess_layout, container, false)
         deviceID = Settings.Secure.getString(mCallback.contentResolver, Settings.Secure.ANDROID_ID)
         db = Firebase.firestore // Reference to database
+
+        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+
+        //Block ID from search
+        street = root.findViewById(R.id.street_name)
+        val bundle = this.arguments
+        if (bundle != null) {
+            blockID = bundle.getString("BlockID").toString()
+            Log.i("Tag", blockID)
+            street.text = blockID
+        }
+
         // Get block ID
-        blockID = "TEST"
-//        if (intent.hasExtra("blockID")) {
-//            blockID = intent.getStringExtra("blockID").toString()
-//        }
+//        blockID = "TEST"
 
         // Initialize EditText fields
         mHousing = root.findViewById<View>(R.id.editTextHousing) as EditText

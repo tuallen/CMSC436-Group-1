@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(com.example.myapplication.R.layout.activity_main)
 
         val fragmentManager: FragmentManager = supportFragmentManager
-        fragmentManager.beginTransaction().replace(com.example.myapplication.R.id.flContent, NeighborhoodHub()).commit()
+        fragmentManager.beginTransaction().replace(com.example.myapplication.R.id.flContent, Search()).commit()
 
         // Set a Toolbar to replace the ActionBar.
         toolbar = findViewById<View>(com.example.myapplication.R.id.toolbar) as Toolbar

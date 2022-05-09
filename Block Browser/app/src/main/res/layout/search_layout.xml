@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/search_background"
+    >
 
 
     <SearchView
@@ -11,15 +13,18 @@
         android:layout_width="310dp"
         android:layout_height="70dp"
         android:layout_marginStart="55dp"
+        android:layout_marginTop="21dp"
         android:layout_marginEnd="56dp"
-        android:layout_marginBottom="356dp"
+        android:layout_marginBottom="549dp"
         android:iconifiedByDefault="false"
         android:queryBackground="@drawable/private_list_owner1"
         android:queryHint="  Street Name, City Name"
         android:searchIcon="@null"
+        android:submitBackground="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
     </SearchView>
 
@@ -28,10 +33,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="90dp"
-        android:layout_marginTop="252dp"
+        android:layout_marginTop="51dp"
         android:layout_marginEnd="91dp"
         android:layout_marginBottom="21dp"
         android:text="Block Finder"
+        android:textColor="@color/white"
         android:textSize="30dp"
         app:layout_constraintBottom_toTopOf="@+id/searchView"
         app:layout_constraintEnd_toEndOf="parent"

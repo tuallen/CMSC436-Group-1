@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -51,6 +52,7 @@ class NeighborhoodHub: Fragment(), OnMapReadyCallback {
                               savedInstanceState: Bundle?): View? {
 
         Log.d(TAG, "Entered Hub onCreateView()")
+        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
 
         // Get views
         root = inflater.inflate(R.layout.hub_layout, container, false)

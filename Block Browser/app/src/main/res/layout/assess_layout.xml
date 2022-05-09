@@ -281,32 +281,19 @@
             android:inputType="number" />
     </RelativeLayout>
 
-    <EditText
+    <TextView
         android:id="@+id/street_name"
-        android:layout_width="170dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="10dp"
-        android:ems="10"
-        android:hint="Enter Street"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toStartOf="@+id/city_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="121dp"
+        android:hint="Enter Review Below"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/city_name"
-        android:layout_width="170dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="31dp"
-        android:ems="10"
-        android:hint="Enter City"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/street_name"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
