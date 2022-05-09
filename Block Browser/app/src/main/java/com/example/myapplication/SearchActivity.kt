@@ -1,42 +1,35 @@
-package com.example.myapplication.search
+package com.example.myapplication
 
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import com.example.myapplication.MainActivity
-import com.example.myapplication.R
-import com.example.myapplication.SearchActivity
-import com.example.myapplication.neighborhood_hub.NeighborhoodHub
+import com.example.myapplication.assessment.NeighborhoodAssessment
 import java.util.regex.Pattern
 
-class Search() : Fragment() {
-    private lateinit var root : View
+class SearchActivity : AppCompatActivity() {
     private lateinit var mPrefs : SharedPreferences
     private lateinit var mNeighborhoodEditText : EditText
     private lateinit var mCityEditText : EditText
     private lateinit var mHubButton : Button
 
-    //Whenever you need the context use mCallback (goes with fun onAttach)
-    private lateinit var mCallback: Context
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_search)
 
-        root = inflater.inflate(com.example.myapplication.R.layout.search_layout, container, false)
         // Initialize views
-        mNeighborhoodEditText = root.findViewById<View>(R.id.searchNeighborhoodEditText) as EditText
-        mCityEditText = root.findViewById<View>(R.id.searchCityEditText) as EditText
-        mHubButton = root.findViewById<View>(R.id.searchButton) as Button
+        mNeighborhoodEditText = findViewById<View>(R.id.searchNeighborhoodEditText) as EditText
+        mCityEditText = findViewById<View>(R.id.searchCityEditText) as EditText
+        mHubButton = findViewById<View>(R.id.searchButton) as Button
 
-        mPrefs = mCallback.getSharedPreferences("block", Context.MODE_PRIVATE) // initialize saved preferences
+        mPrefs = getSharedPreferences("block", Context.MODE_PRIVATE) // initialize saved preferences
         // Load neighborhood and city
         var neighborhood = mPrefs.getString("neighborhood", null)
         var city = mPrefs.getString("city", null)
@@ -54,20 +47,15 @@ class Search() : Fragment() {
                 editor.putString("neighborhood", neighborhood)
                 editor.putString("city", city)
                 editor.apply()
-                activity?.supportFragmentManager!!.beginTransaction().replace(R.id.flContent, NeighborhoodHub()).commit()
-                Toast.makeText(mCallback, "Switched neighborhoods!", Toast.LENGTH_LONG).show()
+
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
             }
             else{
-                Toast.makeText(mCallback, NOT_COMPLETE, Toast.LENGTH_LONG).show()
+                Toast.makeText(this, NOT_COMPLETE, Toast.LENGTH_LONG).show()
             }
-        }
-        return root
-    }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        try { mCallback = context }
-        catch (e: ClassCastException) { throw ClassCastException("$context must implement SelectionListener") }
+        }
     }
 
     private fun capitalize(str: String?): String {
@@ -81,8 +69,7 @@ class Search() : Fragment() {
     }
 
     companion object {
-        private const val TAG = "Search-Fragment"
+        private const val TAG = "Search-Activity"
         private const val NOT_COMPLETE = "Enter a neighborhood and city!"
     }
-
 }

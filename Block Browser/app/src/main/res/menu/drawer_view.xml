@@ -13,5 +13,9 @@
             android:id="@+id/assess"
             android:icon="@drawable/ic_three"
             android:title="My Assessment" />
+        <item
+            android:id="@+id/map"
+            android:icon="@drawable/ic_four"
+            android:title="Map" />
     </group>
 </menu>

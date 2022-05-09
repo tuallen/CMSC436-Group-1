@@ -1,6 +1,9 @@
 package com.example.myapplication
 
 import android.R
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -12,12 +15,14 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.myapplication.assessment.NeighborhoodAssessment
+import com.example.myapplication.map.MapFrag
 import com.example.myapplication.neighborhood_hub.NeighborhoodHub
 import com.example.myapplication.search.Search
 import com.google.android.material.navigation.NavigationView
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var mPrefs : SharedPreferences
     private var mDrawer: DrawerLayout? = null
     private var toolbar: Toolbar? = null
     private var nvDrawer: NavigationView? = null
@@ -29,6 +34,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.example.myapplication.R.layout.activity_main)
+
+//        mPrefs = getPreferences(Context.MODE_PRIVATE) // initialize saved preferences
+//        // Launch search activity if there is no neighborhood or city
+//        var neighborhood = mPrefs.getString("neighborhood", null)
+//        var city = mPrefs.getString("city", null)
+//        if (neighborhood != null || city != null) {
+//            val intent = Intent(this, SearchActivity::class.java)
+//            startActivity(intent)
+//        }
 
         val fragmentManager: FragmentManager = supportFragmentManager
         fragmentManager.beginTransaction().replace(com.example.myapplication.R.id.flContent, NeighborhoodHub()).commit()
@@ -65,6 +79,7 @@ class MainActivity : AppCompatActivity() {
             com.example.myapplication.R.id.hub -> NeighborhoodHub()
             com.example.myapplication.R.id.search -> Search()
             com.example.myapplication.R.id.assess -> NeighborhoodAssessment()
+            com.example.myapplication.R.id.map -> MapFrag()
             else -> NeighborhoodHub()
         }
         try {
